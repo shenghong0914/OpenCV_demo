@@ -1,0 +1,129 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+#include "opencv2/core.hpp"
+#include "opencv2/highgui.hpp"
+#include <opencv2/imgproc.hpp>
+
+using namespace cv;
+
+int main()
+
+{
+	//string path = "resource//ai.png";
+	string path;
+	
+	cout << "Please enter your file path: ";
+	cin >> path; 
+
+	Mat image = imread(path);
+	unsigned int choice = 0;
+	
+	cout << "請輸入您的選擇 (整數1-6):\t";
+	cin >> choice;
+
+	if (choice < 1 || choice > 5)
+
+	{
+
+		cout << "輸入錯誤!!!";
+	}
+
+	
+	
+
+		switch (choice)
+		{
+		case 1:
+		{
+
+			imshow("原始圖像", image);
+
+			break;
+
+
+		}
+
+		case 2:
+		{
+			Mat greyscaleimage;
+
+			cvtColor(image, greyscaleimage, COLOR_BGR2GRAY);
+
+			imshow("灰階圖", greyscaleimage);
+
+			break;
+
+
+		}
+
+		case 3:
+		{
+			Mat flipimage;
+
+			flip(image, flipimage, -1);
+
+			imshow("翻轉圖", flipimage);
+
+			break;
+
+		}
+
+		case 4:
+		{
+			Mat rotateimage;
+
+			rotate(image, rotateimage, ROTATE_90_CLOCKWISE);
+
+			imshow("旋轉影像", rotateimage);
+
+			break;
+
+
+		}
+
+		case 5:
+		{
+
+			Mat negativeimage;
+
+			bitwise_not(image, negativeimage);
+
+
+			imshow("負片影像", negativeimage);
+
+
+
+			break;
+
+		}
+
+			case 6:
+			{
+				Mat edgeimage;
+
+				Canny(image, edgeimage, 180, 60, 3);
+
+				imshow("邊緣影像", edgeimage);
+
+
+
+			}
+
+
+		default:
+			break;
+		}
+
+
+	waitKey(0);
+
+	destroyAllWindows();
+
+	system("pause");
+
+	return 0;
+
+}
